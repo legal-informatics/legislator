@@ -1,0 +1,35 @@
+<project name="Legislator" default="deploy">
+	
+	<property file="ant.properties"/>
+	
+	<property name="generated.dir" value="generated" />
+	
+	<path id="libs">
+		<fileset dir="lib" includes="*.jar"/>
+	</path>
+	
+	<target name="clean">
+		<delete dir="bin"/>
+		<delete dir="${generated.dir}" />
+	</target>
+	
+	<target name="compile">
+		<mkdir dir="bin"/>
+		<javac debug="yes" destdir="bin" srcdir="src" classpathref="libs"/>
+	</target>
+	
+	<target name="build" depends="compile">
+		<mkdir dir="dist"/>
+		<jar destfile="dist/metalex.jar" basedir="bin" >
+			<zipfileset dir="bin" includes="**"/>
+		</jar>
+	</target>
+		
+	<target name="deploy" depends="build">
+		
+	</target>
+		
+	<target name="run">
+		<java fork="true" jar="dist/matalex.jar" />
+	</target>
+</project>

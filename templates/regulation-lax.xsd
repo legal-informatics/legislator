@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+    Закон о Народној скупштини ("Службени гласник РС", број 9/2010)
+    Народна скупштина доноси: закон, буџет, завршни рачун, план развоја, просторни план, пословник, стратегију, декларацију, резолуцију, препоруку, одлуку, закључак и аутентично тумачење закона. 
+-->
+
+<xsd:schema 
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:metalex="http://www.metalex.eu/metalex/1.0" 
+    xmlns:tns="http://informatika.ftn.uns.ac.rs/legal/metalex/1.0/lax"
+    xmlns="http://informatika.ftn.uns.ac.rs/legal/metalex/1.0/lax"
+    targetNamespace="http://informatika.ftn.uns.ac.rs/legal/metalex/1.0/lax" 
+    elementFormDefault="qualified"
+    attributeFormDefault="unqualified">
+    
+    <xsd:import namespace="http://www.w3.org/1999/xlink" />
+    <xsd:import namespace="http://www.metalex.eu/metalex/1.0" schemaLocation="e.xsd" />
+
+    <xsd:element name="regulation" type="metalex:rootType" substitutionGroup="metalex:absRoot"/>
+
+    <xsd:element name="metadata" type="metalex:mcontainerType" substitutionGroup="metalex:absMcontainer"/>
+    
+    <xsd:element name="meta" type="metalex:metaType" substitutionGroup="metalex:absMeta"/>
+
+    <!-- По Јединственим методолошким правилима за израду прописа, пропис садржи преамбулу, уводне одредбе, права и обавезе, овлашћења, казнене одредбе, 
+    прелазне одредбеbe, и завршне одредбе (или прелазне и завршне одредбе) -->
+    
+    <!-- По Јединственим методолошким правилима за израду прописа, прописи могу садржати делове, главе, одељке, пододељке, чланове, ставове, тачке, подтачке и алинеје -->
+    
+    <xsd:element name="title" type="metalex:blockType" substitutionGroup="metalex:absBlock" />
+    
+    <!-- Преамбула садржи правни основ, по правилу прво материјални, а затим формални -->
+    <xsd:element name="preamble" type="metalex:containerType" substitutionGroup="metalex:absContainer"/>
+
+    <xsd:element name="heading" type="metalex:blockType" substitutionGroup="metalex:absHtitle" />
+     
+     <xsd:element name="index" type="metalex:blockType" substitutionGroup="metalex:absHtitle" />
+    
+    <!-- Делови се означавају словима (нпр. Део први) и могу имати назив -->
+    <xsd:element name="part" type="metalex:hcontainerType" substitutionGroup="metalex:absHcontainer"/>
+    
+    <!-- Глава се означава римским бројем, иза којег се ставља тачка и исписује се наслов главе великим словима-->
+    <xsd:element name="chapter" type="metalex:hcontainerType" substitutionGroup="metalex:absHcontainer"/>
+    
+    <!-- Одељак у пропису означава се тако што се изнад текста чланова који чине одељак ставља наслов, а испред наслова се ставља 
+         одговарајући арапски број са тачком. Пододељци и одсеци се означавају према истим принципима као и одељак -->
+    <xsd:element name="section" type="metalex:hcontainerType" substitutionGroup="metalex:absHcontainer"/>
+    
+    <xsd:element name="subsection" type="metalex:hcontainerType" substitutionGroup="metalex:absHcontainer"/>
+    
+    <!-- Члан је основна структурална јединица прописа. Означава се речју "члан" са одговарајућим арапским бројем иза кога се ставља тачка. Има назив који се налази изнад ознаке члана. -->
+    <xsd:element name="article" type="metalex:hcontainerType" substitutionGroup="metalex:absHcontainer"/>
+    
+    <!-- Ако став садржи више правних норми, исте се распоређују на ставове. Свака реченица која представља нову мисао, односно нову правну норму
+         пише се као нови став -->
+    <xsd:element name="item" type="metalex:containerType" substitutionGroup="metalex:absContainer"/>
+    
+    <!-- Тачка треба да буде означена арапским бројем, иза којег се ставља затворена заграда -->
+    <xsd:element name="point" type="metalex:containerType" substitutionGroup="metalex:absContainer"/>
+    
+    <!-- Подтачка треба да буде означена арапским бојем у загради -->
+    <xsd:element name="subpoint" type="metalex:containerType" substitutionGroup="metalex:absContainer"/>
+    
+    <!-- Алинеја се означава са водоравном цртом -->
+    <xsd:element name="line" type="metalex:containerType" substitutionGroup="metalex:absContainer"/>
+
+    <!-- одредба -->
+    <xsd:element name="provision" type="metalex:blockType" substitutionGroup="metalex:absBlock" />
+    
+    <!-- ostaje mi da resim sluzene citata sto nije relevantno za Odluku o pravnom normiranju. Ugledacu se na estrella d3.2 -->
+    <xsd:element name="simple-citation" type="metalex:citationSimpleType" substitutionGroup="metalex:absInline"/>
+    <xsd:element name="citation-range" type="metalex:citationRangeType" substitutionGroup="metalex:absInline"/>
+    <xsd:element name="citation-group" type="metalex:citationGroupType" substitutionGroup="metalex:absInline"/>
+     
+    <xsd:element name="date" type="metalex:dateType" substitutionGroup="metalex:absInline" />
+    
+    <xsd:element name="attachments" type="metalex:blockType" substitutionGroup="metalex:absBlock" />
+    <xsd:element name="attachment" type="metalex:sourceType" substitutionGroup="metalex:absInline" />
+</xsd:schema>

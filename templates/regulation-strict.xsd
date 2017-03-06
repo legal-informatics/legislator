@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+    Закон о Народној скупштини ("Службени гласник РС", број 9/2010)
+    Народна скупштина доноси: закон, буџет, завршни рачун, план развоја, просторни план, пословник, стратегију, декларацију, резолуцију, препоруку, одлуку, закључак и аутентично тумачење закона. 
+-->
+
+<xsd:schema  
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:metalex="http://www.metalex.eu/metalex/1.0" 
+    xmlns:tns="http://informatika.ftn.uns.ac.rs/legal/metalex/1.0/strict"
+    xmlns="http://informatika.ftn.uns.ac.rs/legal/metalex/1.0/strict"
+    targetNamespace="http://informatika.ftn.uns.ac.rs/legal/metalex/1.0/strict" 
+    elementFormDefault="qualified"
+    attributeFormDefault="unqualified">
+    
+    <xsd:import namespace="http://www.w3.org/1999/xlink" />
+    <xsd:import namespace="http://www.metalex.eu/metalex/1.0" schemaLocation="e.xsd"/>
+
+    <xsd:element name="regulation" type="regulationType" substitutionGroup="metalex:absRoot"/>
+
+    <xsd:element name="metadata" type="metalex:mcontainerType" substitutionGroup="metalex:absMcontainer"/>
+    
+    <xsd:element name="meta" type="metaType" substitutionGroup="metalex:absMeta"/>
+
+    <!-- По Јединственим методолошким правилима за израду прописа, пропис садржи преамбулу, уводне одредбе, права и обавезе, овлашћења, казнене одредбе, 
+    прелазне одредбеbe, и завршне одредбе (или прелазне и завршне одредбе) -->
+    
+    <!-- По Јединственим методолошким правилима за израду прописа, прописи могу садржати делове, главе, одељке, пододељке, чланове, ставове, тачке, подтачке и алинеје -->
+    
+    <!-- Преамбула садржи правни основ, по правилу прво материјални, а затим формални -->
+    <xsd:element name="preamble" type="preambleType" substitutionGroup="metalex:absContainer"/>
+    
+    <xsd:element name="title" type="titleType" substitutionGroup="metalex:absBlock" />
+
+    <xsd:element name="heading" type="headingType" substitutionGroup="metalex:absHtitle" />
+     
+    <xsd:element name="index" type="indexType" substitutionGroup="metalex:absHtitle" />
+    
+    <!-- Делови се означавају словима (нпр. Део први) и могу имати назив -->
+    <xsd:element name="part" type="partType" substitutionGroup="metalex:absHcontainer"/>
+    
+    <!-- Глава се означава римским бројем, иза којег се ставља тачка и исписује се наслов главе великим словима-->
+    <xsd:element name="chapter" type="chapterType" substitutionGroup="metalex:absHcontainer"/>
+    
+    <!-- Одељак у пропису означава се тако што се изнад текста чланова који чине одељак ставља наслов, а испред наслова се ставља 
+         одговарајући арапски број са тачком. Пододељци и одсеци се означавају према истим принципима као и одељак -->
+    <xsd:element name="section" type="sectionType" substitutionGroup="metalex:absHcontainer"/>
+    
+    <xsd:element name="subsection" type="subsectionType" substitutionGroup="metalex:absHcontainer"/>
+    
+    <!-- Члан је основна структурална јединица прописа. Означава се речју "члан" са одговарајућим арапским бројем иза кога се ставља тачка. Има назив који се налази изнад ознаке члана. -->
+    <xsd:element name="article" type="articleType" substitutionGroup="metalex:absHcontainer"/>
+    
+    <!-- Ако став садржи више правних норми, исте се распоређују на ставове. Свака реченица која представља нову мисао, односно нову правну норму
+         пише се као нови став -->
+    <xsd:element name="item" type="itemType" substitutionGroup="metalex:absContainer"/>
+    
+    <!-- Тачка треба да буде означена арапским бројем, иза којег се ставља затворена заграда -->
+    <xsd:element name="point" type="pointType" substitutionGroup="metalex:absContainer"/>
+    
+    <!-- Подтачка треба да буде означена арапским бојем у загради -->
+    <xsd:element name="subpoint" type="subpointType" substitutionGroup="metalex:absContainer"/>
+    
+    <!-- Алинеја се означава са водоравном цртом -->
+    <xsd:element name="line" type="lineType" substitutionGroup="metalex:absContainer"/>
+
+    <!-- одредба -->
+    <xsd:element name="provision" type="provisionType" substitutionGroup="metalex:absBlock" />
+    
+    <!-- ostaje mi da resim sluzene citata sto nije relevantno za Odluku o pravnom normiranju. Ugledacu se na estrella d3.2 -->
+    <xsd:element name="simple-citation" type="metalex:citationSimpleType" substitutionGroup="metalex:absInline"/>
+    <xsd:element name="citation-range" type="metalex:citationRangeType" substitutionGroup="metalex:absInline"/>
+    <xsd:element name="citation-group" type="metalex:citationGroupType" substitutionGroup="metalex:absInline"/>
+    
+    <xsd:element name="date" type="metalex:dateType" substitutionGroup="metalex:absInline" />
+    <!-- 
+    <xsd:element name="source" type="metalex:sourceType" substitutionGroup="metalex:absInline" /> 
+    -->
+    
+    <xsd:element name="attachments" type="metalex:blockType" substitutionGroup="metalex:absBlock" />
+    <xsd:element name="attachment" type="metalex:sourceType" substitutionGroup="metalex:absInline" />
+    
+    <!-- Derived types -->
+    
+    <!--  The structure of regulation according to drafting guideliness can not be specified more precisely. 
+        <regulation> ::= <title> (<part>{2,n} | <chapter>{2,n} |  <section>{2,n} | <subsection>{2,n} | <article>{2,n})
+        - Can not insert title element.
+        - Not sure if regulations can directly contain subsections. -->
+    <xsd:complexType name="regulationType">
+        <xsd:complexContent>
+            <xsd:restriction base="metalex:rootType">
+                <xsd:choice minOccurs="1" maxOccurs="unbounded" >
+                    <xsd:element ref="metalex:absMcontainer" />
+                    <xsd:element ref="metalex:absContainer" />
+                    <xsd:element ref="metalex:absHcontainer" />
+                    <xsd:element ref="metalex:absBlock" />
+                    
+                    <!-- Works as choice subelements -->
+                    <!-- 
+                    <xsd:element ref="metadata" />
+                    <xsd:element ref="part" />
+                    <xsd:element ref="chapter" />
+                    <xsd:element ref="section" />
+                    <xsd:element ref="subsection" />
+                    <xsd:element ref="article" />
+                    -->
+                    
+                    <!-- Doesn't work as choice subelements -->
+                    <!-- 
+                    <xsd:element ref="preamble" />
+                    <xsd:element ref="title" />
+                    <xsd:element ref="attachments" />        
+                    -->
+                </xsd:choice>
+                <xsd:attributeGroup ref="metalex:anyattr"/>
+            </xsd:restriction>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <!-- 
+    <xsd:complexType name="metadataType">
+        <xsd:complexContent>
+            <xsd:restriction base="metalex:mcontainerType">
+                <xsd:choice >
+                    <xsd:element ref="metalex:absMeta" minOccurs="1" maxOccurs="unbounded" />
+                    <xsd:element ref="metalex:absMcontainer" minOccurs="1" maxOccurs="unbounded" />
+                </xsd:choice>
+                <xsd:attribute name="type" fixed="metadata" />
+                <xsd:attributeGroup ref="metalex:anyattr"/>
+            </xsd:restriction>
+        </xsd:complexContent>
+    </xsd:complexType>
+    -->
+    
+    <xsd:complexType name="metaType">
+        <xsd:complexContent>
+            <xsd:extension base="metalex:metaType">
+                <xsd:attributeGroup ref="metalex:anyattr" />
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="preambleType">
+        <xsd:complexContent>
+            <xsd:restriction base="metalex:containerType">
+                <xsd:choice minOccurs="1" maxOccurs="unbounded" >
+                    <xsd:element ref="provision" />
+                </xsd:choice>
+                <xsd:attributeGroup ref="metalex:anyattr"/>
+            </xsd:restriction>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <!-- I haven't solved this. Yet! -->
+    <xsd:complexType name="titleType">
+        <xsd:complexContent>
+            <xsd:extension base="metalex:blockType">
+                <xsd:attributeGroup ref="metalex:anyattr"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="headingType">
+        <xsd:complexContent>
+            <xsd:extension base="metalex:blockType">
+                <xsd:attributeGroup ref="metalex:anyattr"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="indexType">
+        <xsd:complexContent>
+            <xsd:extension base="metalex:blockType">
+                <xsd:attributeGroup ref="metalex:anyattr"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <!-- The structure of the part can not be specified more precisely (following drafting guideliness).
+         - Heading is optional. -->
+    <xsd:complexType name="partType">
+        <xsd:complexContent>
+            <xsd:restriction base="metalex:hcontainerType">
+                <xsd:sequence >
+                    <!-- 
+                    <xsd:element ref="index" minOccurs="0" maxOccurs="1" />
+                    -->
+                    <xsd:element ref="metalex:absMcontainer" minOccurs="0" maxOccurs="1" />
+                    <xsd:element ref="metalex:absHtitle" minOccurs="1" maxOccurs="unbounded" />
+                    <!--
+                    <xsd:element ref="heading" minOccurs="1" maxOccurs="1" />
+                    -->
+                    <xsd:choice minOccurs="2" maxOccurs="unbounded" >
+                        <xsd:element ref="chapter" />
+                    </xsd:choice>
+                </xsd:sequence>
+                <xsd:attributeGroup ref="metalex:anyattr"/>
+            </xsd:restriction>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <!-- The structure of the chapter can not be specified more precisely (following drafting guideliness).
+         - Sections and articles can not mix freely. -->
+    <xsd:complexType name="chapterType">
+        <xsd:complexContent>
+            <xsd:restriction base="metalex:hcontainerType">
+                <xsd:sequence >
+                    <xsd:element ref="metalex:absHtitle" minOccurs="1" maxOccurs="unbounded" />
+                    <xsd:choice minOccurs="1" maxOccurs="unbounded" >
+                        <xsd:element ref="section" />
+                        <xsd:element ref="article" />
+                    </xsd:choice>
+                </xsd:sequence>
+                <xsd:attributeGroup ref="metalex:anyattr"/>
+            </xsd:restriction>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <!-- The structure of the section can not be specified more precisely (following drafting guideliness).
+        - Subsections and articles can not mix freely. -->
+    <xsd:complexType name="sectionType">
+        <xsd:complexContent>
+            <xsd:restriction base="metalex:hcontainerType">
+                <xsd:sequence>
+                    <xsd:element ref="metalex:absHtitle" minOccurs="1" maxOccurs="unbounded" />
+                    <xsd:choice minOccurs="1" maxOccurs="unbounded" >
+                        <xsd:element ref="subsection" />
+                        <xsd:element ref="article" />
+                    </xsd:choice>
+                </xsd:sequence>
+                <xsd:attributeGroup ref="metalex:anyattr"/>
+            </xsd:restriction>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="subsectionType">
+        <xsd:complexContent>
+            <xsd:restriction base="metalex:hcontainerType">
+                <xsd:sequence>
+                    <xsd:element ref="metalex:absHtitle" minOccurs="1" maxOccurs="unbounded" />
+                    <xsd:choice minOccurs="1" maxOccurs="unbounded" >
+                        <xsd:element ref="article" />
+                    </xsd:choice>
+                </xsd:sequence>
+                <xsd:attributeGroup ref="metalex:anyattr"/>
+            </xsd:restriction>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <!-- The structure of the article can not be specified more precisely (following drafting guideliness).
+        - Heading is optional. -->
+    <xsd:complexType name="articleType">
+        <xsd:complexContent>
+            <xsd:restriction base="metalex:hcontainerType">
+                <xsd:sequence >
+                    <xsd:element ref="metalex:absHtitle" minOccurs="1" maxOccurs="unbounded" />
+                    <xsd:choice minOccurs="1" maxOccurs="unbounded" >
+                        <xsd:element ref="item" />
+                    </xsd:choice>
+                </xsd:sequence>
+                <xsd:attributeGroup ref="metalex:anyattr"/>
+            </xsd:restriction>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <!-- The structure of the item can not be specified more precisely (following drafting guideliness).
+        - Points and provisions can not mix freely? -->
+    <xsd:complexType name="itemType">
+        <xsd:complexContent>
+            <xsd:restriction base="metalex:containerType">
+                <xsd:choice minOccurs="1" maxOccurs="unbounded" >
+                        <xsd:element ref="point" />
+                        <xsd:element ref="provision" />
+                </xsd:choice>
+                <xsd:attributeGroup ref="metalex:anyattr"/>
+            </xsd:restriction>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <!-- The structure of the point can not be specified more precisely (following drafting guideliness).
+        - Subpoints and provisions can not mix freely? -->
+    <xsd:complexType name="pointType">
+        <xsd:complexContent>
+            <xsd:restriction base="metalex:containerType">
+                <xsd:choice minOccurs="1" maxOccurs="unbounded" >
+                    <xsd:element ref="subpoint" />
+                    <xsd:element ref="provision" />
+                </xsd:choice>
+                <xsd:attributeGroup ref="metalex:anyattr"/>
+            </xsd:restriction>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <!-- The structure of the subpoint can not be specified more precisely (following drafting guideliness).
+        - Lines and provisions can not mix freely? -->
+    <xsd:complexType name="subpointType">
+        <xsd:complexContent>
+            <xsd:restriction base="metalex:containerType">
+                <xsd:choice minOccurs="1" maxOccurs="unbounded" >
+                    <xsd:element ref="line" />
+                    <xsd:element ref="provision" />
+                </xsd:choice>
+                <xsd:attributeGroup ref="metalex:anyattr"/>
+            </xsd:restriction>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="lineType">
+        <xsd:complexContent>
+            <xsd:restriction base="metalex:containerType">
+                <xsd:choice minOccurs="1" maxOccurs="unbounded" >
+                    <xsd:element ref="provision" />
+                </xsd:choice>
+                <xsd:attributeGroup ref="metalex:anyattr"/>
+            </xsd:restriction>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="provisionType">
+        <xsd:complexContent>
+            <xsd:extension base="metalex:blockType">
+                <xsd:attributeGroup ref="metalex:anyattr"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="attachmentsType">
+        <xsd:complexContent>
+            <xsd:extension base="metalex:blockType">
+                <xsd:attributeGroup ref="metalex:anyattr"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <!-- Should attachment be block level element? -->
+    <xsd:complexType name="attachmentType">
+        <xsd:complexContent>
+            <xsd:extension base="metalex:sourceType">
+                <xsd:attributeGroup ref="metalex:anyattr"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+</xsd:schema>

@@ -1,0 +1,324 @@
+regulation {
+    counter-reset: part;
+    counter-reset: chapter;
+    counter-reset: section;
+    counter-reset: subsection;
+    counter-reset:article;
+    counter-reset: point;
+    counter-reset: subpoint;
+    
+    display: block;
+    
+    margin-left: 1in;
+    margin-right: 1in;
+
+}
+
+metadata {
+    display: none;  
+}
+
+meta {
+    display: none;
+}
+
+preamble {
+    display: block;
+    
+    white-space: normal;
+    
+    margin-bottom: 11pt;
+    
+    text-align: justify;
+    text-indent: 1in;   
+    
+}
+
+title {
+    display: block;
+    
+    text-align: center;
+    text-transform: uppercase;
+    
+    font-family: "Arial", sans-serif;
+    font-size: 13pt; 
+    font-weight: bold;
+    
+    margin-top: 22pt;
+    margin-right: 1in;
+    margin-bottom: 22pt;
+    margin-left: 1in;
+}
+
+heading {
+    margin-left: 1in;
+    margin-right: 1in;
+    margin-bottom: 11pt;
+}
+
+index {
+    margin-left: 1in;
+    margin-right: 1in;
+    margin-bottom: 1in;
+}
+/**/
+part > heading:before
+{
+    display: block;
+
+    counter-increment: chapter;
+    content:"Део " counter(chapter, upper-roman) ". ";
+}
+
+part > heading, part > index {
+    display: block;
+    
+    margin-bottom: 11pt;
+   
+    text-align: center;
+    text-transform: uppercase;
+    
+    font-family: "Arial", sans-serif;
+    font-size: 12pt; 
+    font-weight: bold;
+}
+
+part {
+   counter-reset: chapter;
+   counter-reset: section;
+   counter-reset: subsection;
+   
+   display: block;
+   
+   margin-bottom: 11pt;
+   
+   page-break-after: always; 
+}
+/*
+chapter > heading:before
+{
+    display: block;
+    
+    counter-increment: chapter;
+    content:"Глава " counter(chapter, upper-roman);
+}
+*/
+chapter > heading, chapter > index {
+    display: block;
+    
+    margin-bottom: 11pt;
+   
+    text-align: center;
+    text-transform: uppercase;
+    
+    font-family: "Arial", sans-serif;
+    font-size: 12pt; 
+    font-weight: bold;
+}
+
+chapter {
+    counter-reset: section;
+    counter-reset: subsection;
+    
+    display: block;
+    
+    margin-bottom: 11pt;
+}
+/*
+section > heading:before
+{
+    counter-increment: section;
+    content: counter(section, decimal) ". ";
+}
+*/
+section > heading, section > index {
+    display: block;
+    
+    margin-bottom: 11pt;
+   
+    text-align: center;
+    
+    font-family: "Arial", sans-serif;
+    font-size: 12pt; 
+    font-weight: bold;
+}
+
+section {
+    counter-reset: subsection;
+    
+    display: block;
+
+    margin-bottom: 11pt;
+}
+
+/*
+subsection > heading:before
+{
+    counter-increment: subsection;
+    content: counter(subsection, lower-latin) ") ";
+}
+*/
+subsection > heading, subsection > index {
+    display: block;
+    
+    margin-bottom: 11pt;
+   
+    text-align: center;
+    
+    font-family: "Arial", sans-serif;
+    font-size: 11pt;
+    font-weight: bold;
+}
+
+subsection {
+    display: block;
+    
+    margin-bottom: 11pt;
+}
+
+article > heading, article > index {
+    display: block;
+    
+    margin-bottom: 11pt;
+   
+    text-align: center;
+    text-indent: 0in;   
+    
+    font-family: "Arial", sans-serif;
+    font-size: 11pt; 
+    font-style: normal;
+    font-weight: bold;
+}
+/*
+article > heading:after
+{
+    display: block;
+
+    counter-increment:article;
+    content: "Члан " counter(article) ". ";
+    
+    margin-top: 11pt;
+    
+    text-indent: 0in;   
+}
+*/
+article {
+    counter-reset: point;
+    counter-reset: subpoint;
+    
+    display: block;
+    
+    margin-bottom: 11pt;
+    
+    text-align: justify;
+    text-indent: 1in;   
+}
+
+item {
+    display: block;
+    
+    margin-bottom: 11pt;
+}
+/*
+point:before
+{
+    font-family: "Arial", sans-serif;
+    font-size: 11pt; 
+    font-style: normal;
+    font-weight: normal;
+    
+    counter-increment: point;
+    content: counter(point) ") ";
+}
+*/
+point {
+    display: block;
+    
+    counter-reset: subpoint;
+    
+    margin-bottom: 11pt;
+}
+/*
+subpoint:before
+{
+    counter-increment: subpoint;
+    content:"(" counter(subpoint) ") ";
+    
+    font-family: "Arial", sans-serif;
+    font-size: 11pt; 
+    font-style: normal;
+    font-weight: normal;
+}
+*/
+subpoint {
+    display: block;
+    
+    margin-bottom: 11pt;
+}
+/*
+line:before
+{
+    content: "- ";
+    
+    font-family: "Arial", sans-serif;
+    font-size: 11pt; 
+    font-style: normal;
+    font-weight: normal;
+}
+*/
+line {
+    display: block;
+    
+    margin-bottom: 11pt;
+}
+
+provision {
+    display: inline;
+    
+    font-family: "Arial", sans-serif;
+    font-size: 11pt; 
+    font-style: normal;
+    font-weight: normal;
+}
+
+provision:hover {
+	border-style: dotted;
+	border-width: thin;
+}
+
+simple-citation {
+    display: inline;
+    color: blue;
+    cursor: crosshair;
+}
+
+citation-range {
+    display: inline;
+    color: blue;
+    cursor: crosshair;
+}
+
+citation-group {
+    display: inline;
+    color: blue;
+    cursor: crosshair;
+}
+
+date {
+    display: inline;
+    font-style: italic;
+}
+
+attachments {
+    display: none;
+}
+
+attachment {
+    display: none;
+}
+
+/* Elements missing from XML Schema */
+
+source {
+    display: none;
+}
